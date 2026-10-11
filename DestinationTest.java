@@ -1,8 +1,10 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+/** Tests the basic behavior of Destination. */
 public class DestinationTest
 {
+    // The constructor should save both values for the getters.
     @Test
     public void constructorAndGetters()
     {
@@ -11,6 +13,7 @@ public class DestinationTest
         assertEquals("Eiffel Tower", destination.getDescription());
     }
 
+    // A blank name is not a valid destination name.
     @Test
     public void constructorRejectsInvalidName()
     {

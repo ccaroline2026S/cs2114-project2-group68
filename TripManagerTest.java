@@ -3,8 +3,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.Test;
 
+/** Tests adding, finding, changing, removing, and displaying trip items. */
 public class TripManagerTest
 {
+    // Check that a destination can be managed from start to finish.
     @Test
     public void addsSearchesEditsAndRemovesDestination()
     {
@@ -20,6 +22,7 @@ public class TripManagerTest
         assertNull(trip.searchDestination("Rome"));
     }
 
+    // Missing items and invalid names should be handled without exceptions.
     @Test
     public void destinationMethodsHandleInvalidInput()
     {
@@ -31,6 +34,7 @@ public class TripManagerTest
         assertNull(trip.searchDestination(null));
     }
 
+    // A failed edit should leave the existing destination unchanged.
     @Test
     public void editDestinationRejectsInvalidNewName()
     {
@@ -40,6 +44,7 @@ public class TripManagerTest
         assertEquals("Paris", trip.searchDestination("Paris").getName());
     }
 
+    // Check that activities have the same basic management operations.
     @Test
     public void addsSearchesEditsAndRemovesActivity()
     {
@@ -54,6 +59,7 @@ public class TripManagerTest
         assertNull(trip.searchActivity("Kayaking"));
     }
 
+    // Invalid activity names and missing activities should be handled safely.
     @Test
     public void activityMethodsHandleInvalidInput()
     {
@@ -65,6 +71,7 @@ public class TripManagerTest
         assertNull(trip.searchActivity(null));
     }
 
+    // A failed edit should leave the existing activity unchanged.
     @Test
     public void editActivityRejectsInvalidNewName()
     {
@@ -74,6 +81,7 @@ public class TripManagerTest
         assertEquals("Hiking", trip.searchActivity("Hiking").getName());
     }
 
+    // Display should work for both an empty trip and one with items.
     @Test
     public void displayTripHandlesEmptyAndPopulatedTrip()
     {

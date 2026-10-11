@@ -1,14 +1,18 @@
+/** Keeps track of the destinations and activities in a trip. */
 public class TripManager
 {
+    // LinkedChain is the collection type provided for this project.
     private LinkedChain<Destination> destinations;
     private LinkedChain<Activity> activities;
 
+    /** Starts a trip with no destinations or activities. */
     public TripManager()
     {
         destinations = new LinkedChain<Destination>();
         activities = new LinkedChain<Activity>();
     }
 
+    /** Adds a destination, returning false if its name is invalid. */
     public boolean addDestination(String name, String description)
     {
         try
@@ -22,12 +26,14 @@ public class TripManager
         }
     }
 
+    /** Removes a destination by name. */
     public boolean removeDestination(String name)
     {
         Destination destination = searchDestination(name);
         return destination != null && destinations.remove(destination);
     }
 
+    /** Updates the destination with the given old name. */
     public boolean editDestination(
         String oldName, String newName, String newDescription)
     {
@@ -48,12 +54,14 @@ public class TripManager
         }
     }
 
+    /** Finds a destination by name, or returns null if it is not present. */
     public Destination searchDestination(String name)
     {
         if (name == null || name.trim().isEmpty())
         {
             return null;
         }
+        // toArray lets the manager search using the LinkedChain API.
         Destination[] items = destinations.toArray(
             new Destination[destinations.size()]);
         for (Destination destination : items)
@@ -66,6 +74,7 @@ public class TripManager
         return null;
     }
 
+    /** Adds an activity, returning false if its name is invalid. */
     public boolean addActivity(String name, String description)
     {
         try
@@ -79,12 +88,14 @@ public class TripManager
         }
     }
 
+    /** Removes an activity by name. */
     public boolean removeActivity(String name)
     {
         Activity activity = searchActivity(name);
         return activity != null && activities.remove(activity);
     }
 
+    /** Updates the activity with the given old name. */
     public boolean editActivity(
         String oldName, String newName, String newDescription)
     {
@@ -105,12 +116,14 @@ public class TripManager
         }
     }
 
+    /** Finds an activity by name, or returns null if it is not present. */
     public Activity searchActivity(String name)
     {
         if (name == null || name.trim().isEmpty())
         {
             return null;
         }
+        // Use the same search approach as destinations.
         Activity[] items = activities.toArray(
             new Activity[activities.size()]);
         for (Activity activity : items)
@@ -123,6 +136,7 @@ public class TripManager
         return null;
     }
 
+    /** Prints all destinations and activities in the trip. */
     public void displayTrip()
     {
         System.out.println("===== AdventurerGo Trip =====");
