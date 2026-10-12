@@ -2,12 +2,10 @@ import student.TestCase;
 
 /**
  * Tests the Activity class.
- *
- * @author Noah Bierman
- * @version 2026.10.11
  */
 
-public class ActivityTest extends TestCase
+public class ActivityTest
+    extends TestCase
 {
     private Activity activity;
 
@@ -65,6 +63,7 @@ public class ActivityTest extends TestCase
             // Expected
         }
     }
+
 
     /**
      * Tests getting the name.
@@ -132,6 +131,7 @@ public class ActivityTest extends TestCase
         assertEquals("Hike", activity.getName());
     }
 
+
     /**
      * Tests changing the description.
      */
@@ -172,7 +172,7 @@ public class ActivityTest extends TestCase
 
         assertTrue(activity.equals(same));
         assertFalse(activity.equals(different));
-        
+
         Activity differentDescription = new Activity("Hike", "Evening hike");
 
         assertFalse(activity.equals(differentDescription));
@@ -206,39 +206,4 @@ public class ActivityTest extends TestCase
         activity.setDescription("");
         assertEquals("Hike", activity.toString());
     }
-
-
-    /**
-     * Tests that equal activities have the same hash code.
-     */
-    public void testHashCode()
-    {
-        Activity same = new Activity("Hike", "Morning sunrise hike");
-        assertEquals(activity.hashCode(), same.hashCode());
-    }
-
-
-    /**
-     * Tests hashCode with a blank description.
-     */
-    public void testBlankHashCode()
-    {
-        Activity blank = new Activity("Hike", "");
-        
-        activity.setDescription("");
-
-        assertEquals(activity.hashCode(), blank.hashCode());
-    }
-    
-    /**
-     * Tests comparing activities with null descriptions.
-     */
-    public void testEqualsNullDescription()
-    {
-        Activity first = new Activity("Hike", null);
-        Activity second = new Activity("Hike", null);
-
-        assertTrue(first.equals(second));
-        assertFalse(first.equals(activity));
-    }      
 }

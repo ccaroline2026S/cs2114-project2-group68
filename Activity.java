@@ -1,9 +1,6 @@
 /**
- * Represents an activity that someone plans to do on a trip.
- * Each activity has a name and a description.
- *
- * @author Noah Bierman
- * @version 2026.10.11
+ * Represents an activity that someone plans to do on a trip. Each activity has
+ * a name and a description.
  */
 
 public class Activity
@@ -14,20 +11,24 @@ public class Activity
     /**
      * Creates a new activity with a name and description.
      *
-     * @param name the name of the activity
-     * @param description details about the activity
+     * @param name
+     *            the name of the activity
+     * @param description
+     *            details about the activity
      */
-    public Activity(String name, String description) 
+    public Activity(String name, String description)
     {
         setName(name);
         setDescription(description);
     }
+
+
     /**
      * Returns the name of the activity.
      *
      * @return the activity name
      */
-    public String getName() 
+    public String getName()
     {
         return name;
     }
@@ -38,7 +39,7 @@ public class Activity
      *
      * @return the activity description
      */
-    public String getDescription() 
+    public String getDescription()
     {
         return description;
     }
@@ -47,11 +48,12 @@ public class Activity
     /**
      * Changes the name of the activity.
      *
-     * @param name the new activity name
+     * @param name
+     *            the new activity name
      */
-    public void setName(String name) 
+    public void setName(String name)
     {
-        if (name == null || name.trim().isEmpty()) 
+        if (name == null || name.trim().isEmpty())
         {
             throw new IllegalArgumentException(
                 "Activity name cannot be blank.");
@@ -64,9 +66,10 @@ public class Activity
     /**
      * Changes the description of the activity.
      *
-     * @param description the new description
+     * @param description
+     *            the new description
      */
-    public void setDescription(String description) 
+    public void setDescription(String description)
     {
         this.description = description;
     }
@@ -75,7 +78,8 @@ public class Activity
     /**
      * Checks if two activities have the same information.
      *
-     * @param other the object to compare
+     * @param other
+     *            the object to compare
      * @return true if they are the same
      */
     @Override
@@ -90,7 +94,7 @@ public class Activity
         {
             return false;
         }
-        
+
         if (!this.getClass().equals(other.getClass()))
         {
             return false;
@@ -118,32 +122,13 @@ public class Activity
      * @return the activity name and description
      */
     @Override
-    public String toString() 
+    public String toString()
     {
-        if (description == null || description.isEmpty()) 
+        if (description == null || description.isEmpty())
         {
             return name;
         }
 
         return name + ": " + description;
-    }
-
-
-    /**
-     * Returns a hash code based on the activity information.
-     *
-     * @return the activity hash code
-     */
-    @Override
-    public int hashCode() 
-    {
-        int result = name.hashCode();
-
-        if (description != null)
-        {
-            result = 31 * result + description.hashCode();
-        }
-
-        return result;
     }
 }

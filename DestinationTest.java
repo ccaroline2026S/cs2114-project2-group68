@@ -2,22 +2,18 @@ import student.TestCase;
 
 /**
  * Tests the Destination class.
- *
- * @author Noah Bierman
- * @version 2026.10.11
  */
-public class DestinationTest extends TestCase
+public class DestinationTest
+    extends TestCase
 {
     private Destination destination;
-
 
     /**
      * Sets up a destination before each test.
      */
     public void setUp()
     {
-        destination = new Destination(
-            "Paris", "Visit the Eiffel Tower");
+        destination = new Destination("Paris", "Visit the Eiffel Tower");
     }
 
 
@@ -27,8 +23,7 @@ public class DestinationTest extends TestCase
     public void testConstructor()
     {
         assertEquals("Paris", destination.getName());
-        assertEquals("Visit the Eiffel Tower",
-            destination.getDescription());
+        assertEquals("Visit the Eiffel Tower", destination.getDescription());
     }
 
 
@@ -102,8 +97,7 @@ public class DestinationTest extends TestCase
      */
     public void testGetDescription()
     {
-        assertEquals("Visit the Eiffel Tower",
-            destination.getDescription());
+        assertEquals("Visit the Eiffel Tower", destination.getDescription());
     }
 
 
@@ -133,7 +127,7 @@ public class DestinationTest extends TestCase
      * Tests rejecting a bad destination name.
      */
     public void testBadSetName()
-    {   
+    {
         try
         {
             destination.setName("");
@@ -143,7 +137,7 @@ public class DestinationTest extends TestCase
         {
             // Expected
         }
-        
+
         try
         {
             destination.setName(null);
@@ -175,8 +169,7 @@ public class DestinationTest extends TestCase
     {
         destination.setDescription("Visit the Louvre");
 
-        assertEquals("Visit the Louvre",
-            destination.getDescription());
+        assertEquals("Visit the Louvre", destination.getDescription());
     }
 
 
@@ -198,8 +191,7 @@ public class DestinationTest extends TestCase
      */
     public void testEquals()
     {
-        Destination same = new Destination(
-            "Paris", "Visit the Eiffel Tower");
+        Destination same = new Destination("Paris", "Visit the Eiffel Tower");
 
         assertTrue(destination.equals(same));
         assertTrue(destination.equals(destination));
@@ -211,8 +203,7 @@ public class DestinationTest extends TestCase
      */
     public void testBadEquals()
     {
-        Destination different = new Destination(
-            "Paris", "Visit the Louvre");
+        Destination different = new Destination("Paris", "Visit the Louvre");
 
         assertFalse(destination.equals(different));
         assertFalse(destination.equals(null));
@@ -238,8 +229,7 @@ public class DestinationTest extends TestCase
      */
     public void testToString()
     {
-        assertEquals("Paris: Visit the Eiffel Tower",
-            destination.toString());
+        assertEquals("Paris: Visit the Eiffel Tower", destination.toString());
     }
 
 
@@ -256,30 +246,4 @@ public class DestinationTest extends TestCase
 
         assertEquals("Paris", destination.toString());
     }
-
-
-    /**
-     * Tests that equal destinations have the same hash code.
-     */
-    public void testHashCode()
-    {
-        Destination same = new Destination(
-            "Paris", "Visit the Eiffel Tower");
-
-        assertEquals(destination.hashCode(), same.hashCode());
-    }
-
-
-    /**
-     * Tests hashCode with no description.
-     */
-    public void testBlankHashCode()
-    {
-        Destination blank = new Destination("Paris", null);
-
-        destination.setDescription(null);
-
-        assertEquals(destination.hashCode(), blank.hashCode());
-    }
 }
-

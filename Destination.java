@@ -1,11 +1,7 @@
 /**
- * Represents a destination that someone wants to visit
- * during their trip.
- *
- * @author Noah Bierman
- * @version 2026.10.11
+ * Represents a destination that someone wants to visit during their trip.
  */
-public class Destination 
+public class Destination
 {
 
     private String name;
@@ -14,10 +10,12 @@ public class Destination
     /**
      * Creates a destination with a name and description.
      *
-     * @param name the destination name
-     * @param description details about the destination
+     * @param name
+     *            the destination name
+     * @param description
+     *            details about the destination
      */
-    public Destination(String name, String description) 
+    public Destination(String name, String description)
     {
         setName(name);
         setDescription(description);
@@ -29,7 +27,7 @@ public class Destination
      *
      * @return the destination name
      */
-    public String getName() 
+    public String getName()
     {
         return name;
     }
@@ -40,7 +38,7 @@ public class Destination
      *
      * @return the destination description
      */
-    public String getDescription() 
+    public String getDescription()
     {
         return description;
     }
@@ -49,11 +47,12 @@ public class Destination
     /**
      * Changes the destination's name.
      *
-     * @param name the new destination name
+     * @param name
+     *            the new destination name
      */
-    public void setName(String name) 
+    public void setName(String name)
     {
-        if (name == null || name.trim().isEmpty()) 
+        if (name == null || name.trim().isEmpty())
         {
             throw new IllegalArgumentException(
                 "Destination name cannot be blank.");
@@ -66,9 +65,10 @@ public class Destination
     /**
      * Changes the destination's description.
      *
-     * @param description the new description
+     * @param description
+     *            the new description
      */
-    public void setDescription(String description) 
+    public void setDescription(String description)
     {
         this.description = description;
     }
@@ -77,7 +77,8 @@ public class Destination
     /**
      * Checks if two destinations have the same information.
      *
-     * @param other the object being compared
+     * @param other
+     *            the object being compared
      * @return true if the destinations match
      */
     @Override
@@ -92,12 +93,12 @@ public class Destination
         {
             return false;
         }
-        
+
         if (!this.getClass().equals(other.getClass()))
         {
             return false;
         }
-        
+
         Destination otherDestination = (Destination)other;
 
         if (!name.equals(otherDestination.name))
@@ -113,39 +114,20 @@ public class Destination
         return description.equals(otherDestination.description);
     }
 
+
     /**
      * Returns the destination information as a String.
      *
      * @return the destination name and description
      */
     @Override
-    public String toString() 
+    public String toString()
     {
-        if (description == null || description.isEmpty()) 
+        if (description == null || description.isEmpty())
         {
             return name;
         }
 
         return name + ": " + description;
     }
-
-
-    /**
-     * Returns a hash code for the destination.
-     *
-     * @return the destination hash code
-     */
-    @Override
-    public int hashCode()
-    {
-        int result = name.hashCode();
-
-        if (description != null)
-        {
-            result = 31 * result + description.hashCode();
-        }
-
-        return result;
-    }
 }
-
