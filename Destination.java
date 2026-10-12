@@ -1,3 +1,5 @@
+package adventurerGo;
+
 /**
  * Represents a destination that someone wants to visit during their trip.
  */
@@ -10,10 +12,8 @@ public class Destination
     /**
      * Creates a destination with a name and description.
      *
-     * @param name
-     *            the destination name
-     * @param description
-     *            details about the destination
+     * @param name the destination name
+     * @param description details about the destination
      */
     public Destination(String name, String description)
     {
@@ -47,8 +47,7 @@ public class Destination
     /**
      * Changes the destination's name.
      *
-     * @param name
-     *            the new destination name
+     * @param name the new destination name
      */
     public void setName(String name)
     {
@@ -65,8 +64,7 @@ public class Destination
     /**
      * Changes the destination's description.
      *
-     * @param description
-     *            the new description
+     * @param description the new description
      */
     public void setDescription(String description)
     {
@@ -77,8 +75,7 @@ public class Destination
     /**
      * Checks if two destinations have the same information.
      *
-     * @param other
-     *            the object being compared
+     * @param other the object being compared
      * @return true if the destinations match
      */
     @Override

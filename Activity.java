@@ -1,3 +1,5 @@
+package adventurerGo;
+
 /**
  * Represents an activity that someone plans to do on a trip. Each activity has
  * a name and a description.
@@ -11,10 +13,8 @@ public class Activity
     /**
      * Creates a new activity with a name and description.
      *
-     * @param name
-     *            the name of the activity
-     * @param description
-     *            details about the activity
+     * @param name the name of the activity
+     * @param description details about the activity
      */
     public Activity(String name, String description)
     {
@@ -48,8 +48,7 @@ public class Activity
     /**
      * Changes the name of the activity.
      *
-     * @param name
-     *            the new activity name
+     * @param name the new activity name
      */
     public void setName(String name)
     {
@@ -66,8 +65,7 @@ public class Activity
     /**
      * Changes the description of the activity.
      *
-     * @param description
-     *            the new description
+     * @param description the new description
      */
     public void setDescription(String description)
     {
@@ -78,8 +76,7 @@ public class Activity
     /**
      * Checks if two activities have the same information.
      *
-     * @param other
-     *            the object to compare
+     * @param other the object to compare
      * @return true if they are the same
      */
     @Override

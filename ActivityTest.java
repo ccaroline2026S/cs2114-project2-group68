@@ -1,3 +1,5 @@
+package adventurerGo;
+
 import student.TestCase;
 
 /**
