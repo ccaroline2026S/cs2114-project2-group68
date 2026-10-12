@@ -1,3 +1,4 @@
+package adventurerGo;
 /** Keeps track of the destinations and activities in a trip. */
 public class TripManager
 {
