@@ -5,12 +5,14 @@ public class MainMenu
 {
         private TripManager tripManager;
         private Scanner scanner;
-        
+
+        // o(1) because no loops 
         public MainMenu() {
             tripManager = new TripManager();
             scanner = new Scanner(System.in);
         }
-        
+
+        // o(1) per menu selection because reads one menu choice and compares to each number option
         public void run() {
             boolean run = true;
             System.out.println("*    Welcome to AdventurerGo!    *");
@@ -78,12 +80,14 @@ public class MainMenu
             }
         }
 
+        // o(n) for each every destination and activity it prints it
         private void displayTrip()
         {
             tripManager.displayTrip();
             
         }
 
+        // o(1) reads user input input and creates one object
         private void addDestination()
         {
             System.out.println("Enter your next destination name: ");
@@ -107,6 +111,7 @@ public class MainMenu
             
         }
 
+        // o(n) chain has to check every node when search is called 
         private void removeDestination()
         {
             System.out.println("Please enter what destination you want to remove: ");
@@ -131,6 +136,7 @@ public class MainMenu
             
         }
 
+        // o(n) chain has to check every node when search is called 
         private void editDestination()
         {
             System.out.println("Please enter what destination you want to edit: ");
@@ -172,6 +178,7 @@ public class MainMenu
             
         }
 
+         // o(n) chain has to check every node when search is called 
         private void searchDestination()
         {
             System.out.println("Please enter what destination you want to search for: ");
@@ -194,6 +201,7 @@ public class MainMenu
             }
         }
 
+         // o(1) creates one object 
         private void addActivity()
         {
             System.out.println("Enter your new activity name: ");
@@ -217,6 +225,7 @@ public class MainMenu
             
         }
 
+         // o(n) chain has to check every node when search is called 
         private void removeActivity()
         {
             System.out.println("Please enter what activity you want to remove: ");
@@ -241,6 +250,7 @@ public class MainMenu
           
         }
 
+         // o(n) chain has to check every node when search is called 
         private void editActivity()
         {
             System.out.println("Please enter what activity you want to edit: ");
@@ -277,6 +287,7 @@ public class MainMenu
                 + newName + ".");
         }
 
+         // o(n) chain has to check every node when search is called 
         private void searchActivity()
         {
             System.out.println("Please enter what activity you want to search for: ");
@@ -299,7 +310,8 @@ public class MainMenu
             }
             
         }   
-        
+
+         // o(1) creates one object and starts application
         public static void main(String[] args) {
             MainMenu menu = new MainMenu();
             menu.run();
