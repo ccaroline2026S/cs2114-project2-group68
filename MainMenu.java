@@ -310,7 +310,9 @@ public class MainMenu
                 System.out.println(name + " could not be found in your trip.");   
             }
             
-        }    
+        }   
+        public static void main(String[] args) {
+            MainMenu menu = new MainMenu();
+            menu.run();
+        }
     }
-
-}
