@@ -1,5 +1,4 @@
 package adventurerGo;
-
 import java.util.Scanner;
 
 public class MainMenu
@@ -74,7 +73,7 @@ public class MainMenu
                 }
                 else {
                     System.out.println("Invalid Input!"
-                        + "Please select a number from the list.");
+                        + " Please select a number from the list.");
                 }
             }
         }
@@ -94,8 +93,7 @@ public class MainMenu
             String description = scanner.nextLine();
             
             if (name.isBlank()) {
-                System.out.println("Destination cannot be an empty name!"
-                    + "Please enter a destination name: ");
+                System.out.println("Destination cannot be an empty name!");
                 return;
             }
             
@@ -104,8 +102,9 @@ public class MainMenu
             Destination destination = new Destination(name, description);
             tripManager.addDestination(destination);
             
-            System.out.println("You are one step closer to your vacation!"
+            System.out.println("You are one step closer to your vacation! "
                 + name + " has been successfully added!");
+            
         }
 
         private void removeDestination()
@@ -115,15 +114,13 @@ public class MainMenu
             
             
             if (name.isBlank()) {
-                System.out.println("Destination cannot be an empty name!"
-                    + "Please enter a destination name you want to remove: ");
+                System.out.println("Destination cannot be an empty name!");
                 return;
             }
             Destination destination = new Destination(name, "");
 
             if (!tripManager.searchDestination(destination)) {
-                System.out.println("Destination cannot be found!"
-                    + "Please enter a valid destination you want to remove: ");
+                System.out.println("Destination cannot be found!");
                 return;
             }
             
@@ -141,14 +138,12 @@ public class MainMenu
             
             
             if (oldName.isBlank()) {
-                System.out.println("Destination name cannot be an empty!"
-                    + "Please enter a destination name you want to edit: ");
+                System.out.println("Destination name cannot be an empty!");
                 return;
             }
      
             if (!tripManager.searchDestination(new Destination(oldName, ""))) {
-                System.out.println("Destination cannot be found!"
-                    + "Please enter a valid destination you want to edit: ");
+                System.out.println("Destination cannot be found!");
                 return;
             }
             
@@ -170,7 +165,7 @@ public class MainMenu
             
             tripManager.editDestination(oldDestination, newDestination);
             
-            System.out.println(oldName + " has been successfully edited "
+            System.out.println(oldName + " has been successfully edited to "
                 + newName + ".");
             //is there a way to get the new destination 
             //name the user changes it to printed??
@@ -183,8 +178,7 @@ public class MainMenu
             String name = scanner.nextLine();
             
             if (name.isBlank()) {
-                System.out.println("Destination cannot be an empty name!"
-                    + "Please enter a destination name you want to search for: ");
+                System.out.println("Destination cannot be an empty name!");
                 return;
             }
             
@@ -209,8 +203,7 @@ public class MainMenu
             String description = scanner.nextLine();
             
             if (name.isBlank()) {
-                System.out.println("Activity cannot be an empty name!"
-                    + "Please enter a activity name: ");
+                System.out.println("Activity cannot be an empty name!");
                 return;
             }
             
@@ -231,15 +224,13 @@ public class MainMenu
             
             
             if (name.isBlank()) {
-                System.out.println("Activity cannot be an empty name!"
-                    + "Please enter a activity name you want to remove: ");
+                System.out.println("Activity cannot be an empty name!");
                 return;
             }
             Activity activity = new Activity(name, "");
 
             if (!tripManager.searchActivity(activity)) {
-                System.out.println("Activity cannot be found!"
-                    + "Please enter a valid activity you want to remove: ");
+                System.out.println("Activity cannot be found!");
                 return;
             }
             
@@ -257,14 +248,12 @@ public class MainMenu
             
             
             if (oldName.isBlank()) {
-                System.out.println("Activity name cannot be an empty!"
-                    + "Please enter a activity name you want to edit: ");
+                System.out.println("Activity name cannot be an empty!");
                 return;
             }
      
             if (!tripManager.searchActivity(new Activity(oldName, ""))) {
-                System.out.println("Activity cannot be found!"
-                    + "Please enter a valid activity you want to edit: ");
+                System.out.println("Activity cannot be found!");
                 return;
             }
             
@@ -284,7 +273,7 @@ public class MainMenu
             
             tripManager.editActivity(oldActivity, newActivity);
             
-            System.out.println(oldName + " has been successfully edited "
+            System.out.println(oldName + " has been successfully edited to "
                 + newName + ".");
         }
 
@@ -294,8 +283,7 @@ public class MainMenu
             String name = scanner.nextLine();
             
             if (name.isBlank()) {
-                System.out.println("Activity cannot be an empty name!"
-                    + "Please enter a activity name you want to search for: ");
+                System.out.println("Activity cannot be an empty name! ");
                 return;
             }
             
@@ -311,6 +299,7 @@ public class MainMenu
             }
             
         }   
+        
         public static void main(String[] args) {
             MainMenu menu = new MainMenu();
             menu.run();
