@@ -24,8 +24,9 @@ public class TripManager
     /** Removes the matching destination from the trip. */
     public boolean removeDestination(Destination destination)
     {
-        Destination match = findDestination(destination);
-        return match != null && destinations.remove(match);
+        Destination current = findDestination(destination);
+        return current != null && destinations.contains(current)
+            && destinations.remove(current);
     }
 
     /** Replaces an existing destination with the updated one. */
@@ -140,7 +141,8 @@ public class TripManager
     public void displayTrip()
     {
         System.out.println("===== AdventurerGo Trip =====");
-        System.out.println("\nDestinations:");
+        System.out.println("
+Destinations:");
         if (destinations.isEmpty())
         {
             System.out.println("No destinations added yet.");
@@ -154,7 +156,8 @@ public class TripManager
             }
         }
 
-        System.out.println("\nActivities:");
+        System.out.println("
+Activities:");
         if (activities.isEmpty())
         {
             System.out.println("No activities added yet.");
