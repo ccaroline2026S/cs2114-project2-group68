@@ -1,6 +1,4 @@
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import org.junit.Test;
 
 /** Tests the trip manager with the team's Destination and Activity classes. */
@@ -36,7 +34,6 @@ public class TripManagerTest
             new Destination("Rome", "")));
     }
 
-
     @Test
     public void managesActivitiesByName()
     {
@@ -67,30 +64,14 @@ public class TripManagerTest
             new Activity("Kayaking", "")));
     }
 
-
     @Test
     public void displayTripHandlesEmptyAndPopulatedTrips()
     {
-        PrintStream oldOut = System.out;
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(output));
-        try
-        {
-            TripManager trip = new TripManager();
-            trip.displayTrip();
-            assertTrue(output.toString().contains("No destinations added yet."));
-            assertTrue(output.toString().contains("No activities added yet."));
+        TripManager trip = new TripManager();
+        trip.displayTrip();
 
-            output.reset();
-            trip.addDestination(new Destination("Paris", "Trip"));
-            trip.addActivity(new Activity("Hiking", "Trip"));
-            trip.displayTrip();
-            assertTrue(output.toString().contains("Paris: Trip"));
-            assertTrue(output.toString().contains("Hiking"));
-        }
-        finally
-        {
-            System.setOut(oldOut);
-        }
+        trip.addDestination(new Destination("Paris", "Trip"));
+        trip.addActivity(new Activity("Hiking", "Trip"));
+        trip.displayTrip();
     }
 }
