@@ -141,8 +141,8 @@ public class TripManager
     public void displayTrip()
     {
         System.out.println("===== AdventurerGo Trip =====");
-        System.out.println("
-Destinations:");
+        System.out.println();
+        System.out.println("Destinations:");
         if (destinations.isEmpty())
         {
             System.out.println("No destinations added yet.");
@@ -156,8 +156,8 @@ Destinations:");
             }
         }
 
-        System.out.println("
-Activities:");
+        System.out.println();
+        System.out.println("Activities:");
         if (activities.isEmpty())
         {
             System.out.println("No activities added yet.");
