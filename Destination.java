@@ -1,5 +1,6 @@
 package adventurerGo;
 
+
 /**
  * Represents a destination that someone wants to visit during their trip.
  */

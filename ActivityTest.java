@@ -208,4 +208,134 @@ public class ActivityTest
         activity.setDescription("");
         assertEquals("Hike", activity.toString());
     }
+    
+    /**
+     * Tests creating an activity with a destination.
+     */
+    public void testConstructorWithDestination()
+    {
+        Destination paris = new Destination("Paris", "France");
+        Activity tour = new Activity(
+            "Eiffel Tower Tour", "Afternoon visit", paris);
+
+        assertEquals("Eiffel Tower Tour", tour.getName());
+        assertEquals("Afternoon visit", tour.getDescription());
+        assertSame(paris, tour.getDestination());
+    }
+
+
+    /**
+     * Tests rejecting invalid names when creating a linked activity.
+     */
+    public void testBadLinkedConstructor()
+    {
+        Destination paris = new Destination("Paris", "France");
+        String[] invalidNames = { "", null, "   " };
+
+        for (String invalidName : invalidNames)
+        {
+            try
+            {
+                new Activity(invalidName, "Afternoon visit", paris);
+                fail("Should reject an invalid name");
+            }
+            catch (IllegalArgumentException e)
+            {
+                // Expected
+            }
+        }
+    }
+
+
+    /**
+     * Tests activities without an assigned destination.
+     */
+    public void testUnassignedDestination()
+    {
+        assertNull(activity.getDestination());
+
+        Activity unassigned = new Activity("Hike", "Morning hike", null);
+
+        assertNull(unassigned.getDestination());
+    }
+
+
+    /**
+     * Tests assigning and changing a destination.
+     */
+    public void testSetDestination()
+    {
+        Destination paris = new Destination("Paris", "France");
+        Destination rome = new Destination("Rome", "Italy");
+
+        activity.setDestination(paris);
+        assertSame(paris, activity.getDestination());
+
+        activity.setDestination(rome);
+        assertSame(rome, activity.getDestination());
+    }
+
+
+    /**
+     * Tests removing a destination link.
+     */
+    public void testClearDestination()
+    {
+        activity.setDestination(new Destination("Paris", "France"));
+        activity.setDestination(null);
+
+        assertNull(activity.getDestination());
+        assertEquals("Hike: Morning sunrise hike", activity.toString());
+    }
+
+
+    /**
+     * Tests displaying an activity with a destination.
+     */
+    public void testToStringWithDestination()
+    {
+        activity.setDestination(new Destination("Paris", "France"));
+
+        assertEquals(
+            "Hike: Morning sunrise hike [Destination: Paris]",
+            activity.toString());
+
+        activity.setDescription("");
+        assertEquals("Hike [Destination: Paris]", activity.toString());
+
+        activity.setDescription(null);
+        assertEquals("Hike [Destination: Paris]", activity.toString());
+    }
+
+
+    /**
+     * Tests that renaming the destination updates the activity display.
+     */
+    public void testLinkedDestinationRename()
+    {
+        Destination destination = new Destination("Paris", "France");
+        activity.setDestination(destination);
+
+        destination.setName("Rome");
+
+        assertSame(destination, activity.getDestination());
+        assertEquals(
+            "Hike: Morning sunrise hike [Destination: Rome]",
+            activity.toString());
+    }
+
+
+    /**
+     * Tests that destination links do not change the matching rules.
+     */
+    public void testEqualsWithDestination()
+    {
+        Activity same = new Activity("Hike", "Morning sunrise hike");
+
+        activity.setDestination(new Destination("Paris", "France"));
+        same.setDestination(new Destination("Rome", "Italy"));
+
+        assertTrue(activity.equals(same));
+        assertTrue(same.equals(activity));
+    }
 }

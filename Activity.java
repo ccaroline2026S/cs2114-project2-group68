@@ -9,6 +9,7 @@ public class Activity
 {
     private String name;
     private String description;
+    private Destination destination;
 
     /**
      * Creates a new activity with a name and description.
@@ -20,6 +21,22 @@ public class Activity
     {
         setName(name);
         setDescription(description);
+    }
+    
+    /**
+     * Creates an activity linked to a destination.
+     *
+     * @param name the activity name
+     * @param description details about the activity
+     * @param destination the destination for this activity
+     */
+    public Activity(
+        String name,
+        String description,
+        Destination destination)
+    {
+        this(name, description);
+        setDestination(destination);
     }
 
 
@@ -114,18 +131,47 @@ public class Activity
 
 
     /**
-     * Returns the activity information as a String.
+     * Returns the activity information and its linked destination.
      *
-     * @return the activity name and description
+     * @return the formatted activity information
      */
     @Override
     public String toString()
     {
-        if (description == null || description.isEmpty())
+        String result = name;
+
+        if (description != null && !description.isEmpty())
         {
-            return name;
+            result += ": " + description;
         }
 
-        return name + ": " + description;
+        if (destination != null)
+        {
+            result += " [Destination: " + destination.getName() + "]";
+        }
+
+        return result;
+    }
+
+    
+    /**
+     * Returns the destination linked to this activity.
+     *
+     * @return the destination, or null if unassigned
+     */
+    public Destination getDestination()
+    {
+        return destination;
+    }
+
+
+    /**
+     * Changes the destination linked to this activity.
+     *
+     * @param destination the destination, or null to remove the link
+     */
+    public void setDestination(Destination destination)
+    {
+        this.destination = destination;
     }
 }
