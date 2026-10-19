@@ -1,0 +1,28 @@
+package AdventurerGo;
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.junit.Before;
+
+public class MainMenuTest
+{
+    private MainMenu menu;
+    
+    @Before
+    public void setUp()
+    {
+        menu = new MainMenu();
+    }
+    
+    @Test
+    public void testConstructor() {
+        assertNotNull(menu);
+    }
+    
+    @Test
+    public void testMultipleMenus() {
+        assertNotNull(menu);
+        MainMenu secondMenu = new MainMenu();
+        assertNotSame(menu, secondMenu);
+    }
+}

@@ -12,7 +12,7 @@ public class MainMenu
             scanner = new Scanner(System.in);
         }
 
-        // Menu actions that search or display the trip take O(n).
+        // o(1) per menu selection because reads one menu choice and compares to each number option
         public void run() {
             boolean run = true;
             System.out.println("*    Welcome to AdventurerGo!    *");
@@ -32,78 +32,50 @@ public class MainMenu
                 System.out.println("7:  Edit Activity");
                 System.out.println("8:  Search Activity");
                 System.out.println("9:  exit");
-                System.out.println("10: Link or unlink an activity and destination");
-                System.out.println("11: Set destination cost (excluding activities)");
-                System.out.println("12: Set activity cost");
-                System.out.println("13: Estimate total trip cost");
                 System.out.println(" ");
                 System.out.println("Your Selection: ");
                 //reads an entire line of input from user 
-                if (!scanner.hasNextLine()) {
-                    return;
-                }
                 String selection = scanner.nextLine();
-                try {
                 
-                    if (selection.equals("0")) {
-                        displayTrip();
-                    }
-                    else if (selection.equals("1")) {
-                        addDestination();
-                    }
-                    else if (selection.equals("2")) {
-                        removeDestination();
-                    }
-                    else if (selection.equals("3")) {
-                        editDestination();
-                    }
-                    else if (selection.equals("4")) {
-                        searchDestination();
-                    }
-                    else if (selection.equals("5")) {
-                        addActivity();
-                    }
-                    else if (selection.equals("6")) {
-                        removeActivity();
-                    }
-                    else if (selection.equals("7")) {
-                        editActivity();
-                    }
-                    else if (selection.equals("8")) {
-                        searchActivity();
-                    }
-                    else if (selection.equals("10")) {
-                        associateActivity();
-                    }
-                    else if (selection.equals("11")) {
-                        setCost(true);
-                    }
-                    else if (selection.equals("12")) {
-                        setCost(false);
-                    }
-                    else if (selection.equals("13")) {
-                        System.out.printf(java.util.Locale.US,
-                            "Estimated trip cost: %.2f%n", tripManager.estimateTripCost());
-                    }
-                    else if (selection.equals("9")) {
-                        //if user selects 9...
-                        //changes run to false which breaks out of while loop
-                        run = false;
-                        System.out.println(" ");
-                        System.out.println("Thanks for creating your next adventure "
-                            + "with AdventurerGo");
-                        System.out.println(" ");
-                    }
-                    else {
-                        System.out.println("Invalid Input!"
-                            + " Please select a number from the list.");
-                    }
+                if (selection.equals("0")) {
+                    displayTrip();
                 }
-                catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
+                else if (selection.equals("1")) {
+                    addDestination();
                 }
-                catch (java.util.NoSuchElementException e) {
-                    return;
+                else if (selection.equals("2")) {
+                    removeDestination();
+                }
+                else if (selection.equals("3")) {
+                    editDestination();
+                }
+                else if (selection.equals("4")) {
+                    searchDestination();
+                }
+                else if (selection.equals("5")) {
+                    addActivity();
+                }
+                else if (selection.equals("6")) {
+                    removeActivity();
+                }
+                else if (selection.equals("7")) {
+                    editActivity();
+                }
+                else if (selection.equals("8")) {
+                    searchActivity();
+                }
+                else if (selection.equals("9")) {
+                    //if user selects 9...
+                    //changes run to false which breaks out of while loop
+                    run = false;
+                    System.out.println(" ");
+                    System.out.println("Thanks for creating your next adventure "
+                        + "with AdventurerGo");
+                    System.out.println(" ");
+                }
+                else {
+                    System.out.println("Invalid Input!"
+                        + " Please select a number from the list.");
                 }
             }
         }
@@ -115,23 +87,24 @@ public class MainMenu
             
         }
 
-        // o(n) checks for an existing destination with the same name
+        // o(1) reads user input input and creates one object
         private void addDestination()
         {
             System.out.println("Enter your next destination name: ");
-            String name = readName();
+            String name = scanner.nextLine();
             
             System.out.println("Enter your next destination description: ");
             String description = scanner.nextLine();
             
+            if (name.isBlank()) {
+                System.out.println("Destination cannot be an empty name!");
+                return;
+            }
             
             //cast and create a new destination object this may not be needed
             //depending on how trip manager is 
             Destination destination = new Destination(name, description);
-            if (!tripManager.addDestination(destination)) {
-                System.out.println("Destination name already exists.");
-                return;
-            }
+            tripManager.addDestination(destination);
             
             System.out.println("You are one step closer to your vacation! "
                 + name + " has been successfully added!");
@@ -142,9 +115,13 @@ public class MainMenu
         private void removeDestination()
         {
             System.out.println("Please enter what destination you want to remove: ");
-            String name = readName();
+            String name = scanner.nextLine();
             
             
+            if (name.isBlank()) {
+                System.out.println("Destination cannot be an empty name!");
+                return;
+            }
             Destination destination = new Destination(name, "");
 
             if (!tripManager.searchDestination(destination)) {
@@ -163,9 +140,13 @@ public class MainMenu
         private void editDestination()
         {
             System.out.println("Please enter what destination you want to edit: ");
-            String oldName = readName();
+            String oldName = scanner.nextLine();
             
             
+            if (oldName.isBlank()) {
+                System.out.println("Destination name cannot be an empty!");
+                return;
+            }
      
             if (!tripManager.searchDestination(new Destination(oldName, ""))) {
                 System.out.println("Destination cannot be found!");
@@ -174,20 +155,21 @@ public class MainMenu
             
             //cast
             System.out.println("Enter the edited destination name: ");
-            String newName = readName();
+            String newName = scanner.nextLine();
             
             System.out.println("Enter the edited destination description: ");
             String newDescription = scanner.nextLine();
             
+            if (newName.isBlank()) {
+                System.out.println("New name cannot be empty");
+                return;
+            }
             
             //depends on trip manager
             Destination oldDestination = new Destination(oldName, "");
             Destination newDestination = new Destination(newName, newDescription);
             
-            if (!tripManager.editDestination(oldDestination, newDestination)) {
-                System.out.println("Name already exists or item was not found.");
-                return;
-            }
+            tripManager.editDestination(oldDestination, newDestination);
             
             System.out.println(oldName + " has been successfully edited to "
                 + newName + ".");
@@ -200,8 +182,12 @@ public class MainMenu
         private void searchDestination()
         {
             System.out.println("Please enter what destination you want to search for: ");
-            String name = readName();
+            String name = scanner.nextLine();
             
+            if (name.isBlank()) {
+                System.out.println("Destination cannot be an empty name!");
+                return;
+            }
             
             Destination destination = new Destination(name, "");
             
@@ -215,23 +201,24 @@ public class MainMenu
             }
         }
 
-         // o(n) checks for an existing activity with the same name
+         // o(1) creates one object 
         private void addActivity()
         {
             System.out.println("Enter your new activity name: ");
-            String name = readName();
+            String name = scanner.nextLine();
             
             System.out.println("Enter your new activity decscription: ");
             String description = scanner.nextLine();
             
+            if (name.isBlank()) {
+                System.out.println("Activity cannot be an empty name!");
+                return;
+            }
             
             //cast and create a new destination object this may not be needed
             //depending on how trip manager is 
             Activity activity = new Activity(name, description);
-            if (!tripManager.addActivity(activity)) {
-                System.out.println("Activity name already exists.");
-                return;
-            }
+            tripManager.addActivity(activity);
             
             System.out.println("You're vacation just got more fun! "
                 + name + " has been successfully added!");
@@ -242,9 +229,13 @@ public class MainMenu
         private void removeActivity()
         {
             System.out.println("Please enter what activity you want to remove: ");
-            String name = readName();
+            String name = scanner.nextLine();
             
             
+            if (name.isBlank()) {
+                System.out.println("Activity cannot be an empty name!");
+                return;
+            }
             Activity activity = new Activity(name, "");
 
             if (!tripManager.searchActivity(activity)) {
@@ -263,9 +254,13 @@ public class MainMenu
         private void editActivity()
         {
             System.out.println("Please enter what activity you want to edit: ");
-            String oldName = readName();
+            String oldName = scanner.nextLine();
             
             
+            if (oldName.isBlank()) {
+                System.out.println("Activity name cannot be an empty!");
+                return;
+            }
      
             if (!tripManager.searchActivity(new Activity(oldName, ""))) {
                 System.out.println("Activity cannot be found!");
@@ -273,19 +268,20 @@ public class MainMenu
             }
             
             System.out.println("Enter the edited activity name: ");
-            String newName = readName();
+            String newName = scanner.nextLine();
             
             System.out.println("Enter the edited activity decription: ");
             String newDescription = scanner.nextLine();
             
+            if (newName.isBlank()) {
+                System.out.println("New name cannot be empty");
+                return;
+            }
             //depends on trip manager
             Activity oldActivity = new Activity(oldName, "");
             Activity newActivity = new Activity(newName, newDescription);
             
-            if (!tripManager.editActivity(oldActivity, newActivity)) {
-                System.out.println("Name already exists or item was not found.");
-                return;
-            }
+            tripManager.editActivity(oldActivity, newActivity);
             
             System.out.println(oldName + " has been successfully edited to "
                 + newName + ".");
@@ -295,8 +291,12 @@ public class MainMenu
         private void searchActivity()
         {
             System.out.println("Please enter what activity you want to search for: ");
-            String name = readName();
+            String name = scanner.nextLine();
             
+            if (name.isBlank()) {
+                System.out.println("Activity cannot be an empty name! ");
+                return;
+            }
             
             Activity activity = new Activity(name, "");
             
@@ -310,57 +310,6 @@ public class MainMenu
             }
             
         }   
-
-        // Uses the same name rules as the model and keeps asking on bad input.
-        private String readName() {
-            while (true) {
-                String name = scanner.nextLine();
-                try {
-                    new Destination(name, "");
-                    return name;
-                }
-                catch (IllegalArgumentException e) {
-                    System.out.println("Name cannot be blank or only a number. Try again:");
-                }
-            }
-        }
-
-        private void associateActivity() {
-            System.out.println("Activity name:");
-            Activity activity = new Activity(readName(), "");
-            System.out.println("Destination name (leave blank to unlink):");
-            String name = scanner.nextLine();
-            Destination destination = name.isBlank() ? null : new Destination(name, "");
-            if (tripManager.associateActivity(activity, destination)) {
-                System.out.println("Activity destination updated.");
-            }
-            else {
-                System.out.println("Activity or destination was not found.");
-            }
-        }
-
-        private void setCost(boolean destination) {
-            System.out.println(destination ? "Destination name:" : "Activity name:");
-            String name = readName();
-            while (true) {
-                System.out.println("Enter a nonnegative cost in your trip's currency:");
-                String input = scanner.nextLine();
-                try {
-                    double cost = Double.parseDouble(input);
-                    if (!Double.isFinite(cost) || cost < 0) {
-                        throw new IllegalArgumentException();
-                    }
-                    boolean updated = destination
-                        ? tripManager.setDestinationCost(new Destination(name, ""), cost)
-                        : tripManager.setActivityCost(new Activity(name, ""), cost);
-                    System.out.println(updated ? "Cost updated." : "Item was not found.");
-                    return;
-                }
-                catch (IllegalArgumentException e) {
-                    System.out.println("Invalid cost. Enter a finite, nonnegative number.");
-                }
-            }
-        }
 
          // o(1) creates one object and starts application
         public static void main(String[] args) {
