@@ -1,5 +1,6 @@
 package adventurerGo;
 /** Keeps track of the destinations and activities in a trip. */
+
 public class TripManager
 {
     private LinkedChain<Destination> destinations;
@@ -26,8 +27,20 @@ public class TripManager
     public boolean removeDestination(Destination destination)
     {
         Destination current = findDestination(destination);
-        return current != null && destinations.contains(current)
-            && destinations.remove(current);
+        if (current == null || !destinations.contains(current)
+            || !destinations.remove(current))
+        {
+            return false;
+        }
+        for (Activity activity : activities.toArray(
+            new Activity[activities.size()]))
+        {
+            if (activity.getDestination() == current)
+            {
+                activity.setDestination(null);
+            }
+        }
+        return true;
     }
 
     /** Replaces an existing destination with the updated one. */
@@ -136,6 +149,67 @@ public class TripManager
             }
         }
         return null;
+    }
+    
+    /** Links an existing activity to an existing destination; null unlinks it. */
+    public boolean associateActivity(Activity activity, Destination destination)
+    {
+        Activity current = findActivity(activity);
+        Destination target = findDestination(destination);
+        if (current == null || (destination != null && target == null))
+        {
+            return false;
+        }
+        current.setDestination(target);
+        return true;
+    }
+
+    /** Updates a destination's separate travel/lodging estimate. */
+    public boolean setDestinationCost(Destination destination, double cost)
+    {
+        Destination current = findDestination(destination);
+        if (current == null)
+        {
+            return false;
+        }
+        current.setEstimatedCost(cost);
+        return true;
+    }
+
+    /** Updates an activity's estimate. */
+    public boolean setActivityCost(Activity activity, double cost)
+    {
+        Activity current = findActivity(activity);
+        if (current == null)
+        {
+            return false;
+        }
+        current.setEstimatedCost(cost);
+        return true;
+    }
+
+    /** Sums each destination and activity once, including unassigned activities. */
+    public double estimateTripCost()
+    {
+        java.math.BigDecimal total = java.math.BigDecimal.ZERO;
+        for (Destination destination : destinations.toArray(
+            new Destination[destinations.size()]))
+        {
+            total = total.add(java.math.BigDecimal.valueOf(
+                destination.getEstimatedCost()));
+        }
+        for (Activity activity : activities.toArray(
+            new Activity[activities.size()]))
+        {
+            total = total.add(java.math.BigDecimal.valueOf(
+                activity.getEstimatedCost()));
+        }
+        double result = total.doubleValue();
+        if (!Double.isFinite(result))
+        {
+            throw new IllegalArgumentException("Trip cost is too large.");
+        }
+        return result;
     }
 
     /** Prints all destinations and activities in the trip. */
