@@ -248,4 +248,33 @@ public class DestinationTest
 
         assertEquals("Paris", destination.toString());
     }
+    
+    /**
+     * Tests estimated cost.
+     */
+    public void testEstimatedCost()
+    {
+        destination.setEstimatedCost(100.50);
+
+        assertEquals(100.50, destination.getEstimatedCost(), 0.001);
+    }
+
+
+    /**
+     * Tests invalid estimated costs.
+     */
+    public void testBadEstimatedCost()
+    {
+        try
+        {
+            destination.setEstimatedCost(-10);
+            fail("Negative costs should not be allowed.");
+        }
+        catch (IllegalArgumentException e)
+        {
+            // Expected
+        }
+
+        assertEquals(0.0, destination.getEstimatedCost(), 0.001);
+    }
 }
