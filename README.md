@@ -8,16 +8,27 @@ AdventurerGo is a travel planning application that allows users to create and ma
 Users can:
 
 Add destinations
+
 Remove destinations
+
 Edit destinations
+
 Search destinations
+
 Add activities
+
 Remove activities
+
 Edit activities
+
 Search activities
+
 Connect activities to destinations (Stretch)
+
 Assign estimated costs to destinations (Stretch)
+
 Assign estimated costs to activities (Stretch)
+
 Estimate the total cost of a trip (Stretch)
 
 The project demonstrates reuse through a generic LinkedChain<T> that stores both Destination and Activity objects.
@@ -63,9 +74,9 @@ Stretch goals - Cost Estimation - Eyal - Wrote, Association - Noah - Wrote
 
 # GenAI Usage
 GenAI was used to:
-Debug code and identify error 
-Brainstorm edge cases for testing
-Review implementations for consistency
-Assist with documentation and reflection writing
+1. Debug code and identify error
+2. Brainstorm edge cases for testing
+3. Review implementations for consistency
+4. Assist with documentation and reflection writing
 
 All generated suggestions were reviewed and tested by team members before being included in the final submission.
