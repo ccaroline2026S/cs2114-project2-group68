@@ -1,19 +1,21 @@
 package adventurerGo;
 
-import student.TestCase;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Tests the Activity class.
  */
 
 public class ActivityTest
-    extends TestCase
 {
     private Activity activity;
 
     /**
      * Sets up an activity for testing.
      */
+    @Before
     public void setUp()
     {
         activity = new Activity("Hike", "Morning sunrise hike");
@@ -23,6 +25,7 @@ public class ActivityTest
     /**
      * Tests creating an activity.
      */
+    @Test
     public void testConstructor()
     {
         assertEquals("Hike", activity.getName());
@@ -33,6 +36,7 @@ public class ActivityTest
     /**
      * Tests creating an activity with a bad name.
      */
+    @Test
     public void testBadConstructor()
     {
         try
@@ -70,6 +74,7 @@ public class ActivityTest
     /**
      * Tests getting the name.
      */
+    @Test
     public void testGetName()
     {
         assertEquals("Hike", activity.getName());
@@ -98,6 +103,7 @@ public class ActivityTest
     /**
      * Tests changing the name to something invalid.
      */
+    @Test
     public void testBadSetName()
     {
         try
@@ -137,6 +143,7 @@ public class ActivityTest
     /**
      * Tests changing the description.
      */
+    @Test
     public void testSetDescription()
     {
         activity.setDescription("Evening hike");
@@ -147,6 +154,7 @@ public class ActivityTest
     /**
      * Tests that the description can be blank.
      */
+    @Test
     public void testBlankDescription()
     {
         activity.setDescription("");
@@ -157,6 +165,7 @@ public class ActivityTest
     /**
      * Tests getting a blank description.
      */
+    @Test
     public void testGetBlankDescription()
     {
         Activity blank = new Activity("Hike", "");
@@ -167,6 +176,7 @@ public class ActivityTest
     /**
      * Tests comparing two activities.
      */
+    @Test
     public void testEquals()
     {
         Activity same = new Activity("Hike", "Morning sunrise hike");
@@ -184,6 +194,7 @@ public class ActivityTest
     /**
      * Tests comparing with null and a different type.
      */
+    @Test
     public void testBadEquals()
     {
         assertFalse(activity.equals(null));
@@ -194,6 +205,7 @@ public class ActivityTest
     /**
      * Tests displaying the activity.
      */
+    @Test
     public void testToString()
     {
         assertEquals("Hike: Morning sunrise hike", activity.toString());
@@ -203,20 +215,23 @@ public class ActivityTest
     /**
      * Tests displaying an activity with no description.
      */
+    @Test
     public void testBlankToString()
     {
         activity.setDescription("");
         assertEquals("Hike", activity.toString());
     }
-    
+
+
     /**
      * Tests creating an activity with a destination.
      */
+    @Test
     public void testConstructorWithDestination()
     {
         Destination paris = new Destination("Paris", "France");
-        Activity tour = new Activity(
-            "Eiffel Tower Tour", "Afternoon visit", paris);
+        Activity tour =
+            new Activity("Eiffel Tower Tour", "Afternoon visit", paris);
 
         assertEquals("Eiffel Tower Tour", tour.getName());
         assertEquals("Afternoon visit", tour.getDescription());
@@ -227,6 +242,7 @@ public class ActivityTest
     /**
      * Tests rejecting invalid names when creating a linked activity.
      */
+    @Test
     public void testBadLinkedConstructor()
     {
         Destination paris = new Destination("Paris", "France");
@@ -250,6 +266,7 @@ public class ActivityTest
     /**
      * Tests activities without an assigned destination.
      */
+    @Test
     public void testUnassignedDestination()
     {
         assertNull(activity.getDestination());
@@ -263,6 +280,7 @@ public class ActivityTest
     /**
      * Tests assigning and changing a destination.
      */
+    @Test
     public void testSetDestination()
     {
         Destination paris = new Destination("Paris", "France");
@@ -279,6 +297,7 @@ public class ActivityTest
     /**
      * Tests removing a destination link.
      */
+    @Test
     public void testClearDestination()
     {
         activity.setDestination(new Destination("Paris", "France"));
@@ -292,6 +311,7 @@ public class ActivityTest
     /**
      * Tests displaying an activity with a destination.
      */
+    @Test
     public void testToStringWithDestination()
     {
         activity.setDestination(new Destination("Paris", "France"));
@@ -311,6 +331,7 @@ public class ActivityTest
     /**
      * Tests that renaming the destination updates the activity display.
      */
+    @Test
     public void testLinkedDestinationRename()
     {
         Destination destination = new Destination("Paris", "France");
@@ -328,6 +349,7 @@ public class ActivityTest
     /**
      * Tests that destination links do not change the matching rules.
      */
+    @Test
     public void testEqualsWithDestination()
     {
         Activity same = new Activity("Hike", "Morning sunrise hike");
@@ -338,11 +360,16 @@ public class ActivityTest
         assertTrue(activity.equals(same));
         assertTrue(same.equals(activity));
     }
-    /** Numeric names are rejected at creation and rename without changing state. */
+
+
+    /**
+     * Numeric names are rejected at creation and rename without changing state.
+     */
+    @Test
     public void testNumericNames()
     {
-        String[] names = {"123", " 00123 ", "0", "-12", "+12", "12.5",
-            ".5", "1e3", "１２３", "999999999999999999999999999999"};
+        String[] names = { "123", " 00123 ", "0", "-12", "+12", "12.5", ".5",
+            "1e3", "１２３", "999999999999999999999999999999" };
         Activity item = new Activity("Original", "Details");
         for (String name : names)
         {
@@ -371,15 +398,19 @@ public class ActivityTest
         assertEquals("5K Run", new Activity("5K Run", "").getName());
     }
 
-    /** Zero, decimal and invalid costs, including unchanged state after failure. */
+
+    /**
+     * Zero, decimal and invalid costs, including unchanged state after failure.
+     */
+    @Test
     public void testEstimatedCost()
     {
         Activity item = new Activity("Original", "");
         assertEquals(0.0, item.getEstimatedCost(), 0.0);
         item.setEstimatedCost(12.50);
         assertEquals(12.50, item.getEstimatedCost(), 0.0);
-        double[] invalid = {-1, -0.01, Double.NaN,
-            Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
+        double[] invalid = { -1, -0.01, Double.NaN, Double.POSITIVE_INFINITY,
+            Double.NEGATIVE_INFINITY };
         for (double cost : invalid)
         {
             try

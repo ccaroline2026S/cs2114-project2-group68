@@ -1,18 +1,20 @@
 package adventurerGo;
 
-import student.TestCase;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Tests the Destination class.
  */
 public class DestinationTest
-    extends TestCase
 {
     private Destination destination;
 
     /**
      * Sets up a destination before each test.
      */
+    @Before
     public void setUp()
     {
         destination = new Destination("Paris", "Visit the Eiffel Tower");
@@ -22,6 +24,7 @@ public class DestinationTest
     /**
      * Tests creating a destination.
      */
+    @Test
     public void testConstructor()
     {
         assertEquals("Paris", destination.getName());
@@ -32,6 +35,7 @@ public class DestinationTest
     /**
      * Tests creating a destination with a bad name.
      */
+    @Test
     public void testBadConstructor()
     {
         try
@@ -69,6 +73,7 @@ public class DestinationTest
     /**
      * Tests getting the destination name.
      */
+    @Test
     public void testGetName()
     {
         assertEquals("Paris", destination.getName());
@@ -97,6 +102,7 @@ public class DestinationTest
     /**
      * Tests getting the destination description.
      */
+    @Test
     public void testGetDescription()
     {
         assertEquals("Visit the Eiffel Tower", destination.getDescription());
@@ -106,6 +112,7 @@ public class DestinationTest
     /**
      * Tests getting an empty description.
      */
+    @Test
     public void testGetDescriptionBlank()
     {
         Destination blank = new Destination("Paris", "");
@@ -117,6 +124,7 @@ public class DestinationTest
     /**
      * Tests changing the destination name.
      */
+    @Test
     public void testSetName()
     {
         destination.setName("Rome");
@@ -128,6 +136,7 @@ public class DestinationTest
     /**
      * Tests rejecting a bad destination name.
      */
+    @Test
     public void testBadSetName()
     {
         try
@@ -178,6 +187,7 @@ public class DestinationTest
     /**
      * Tests allowing a blank description.
      */
+    @Test
     public void testBlankDescription()
     {
         destination.setDescription("");
@@ -191,6 +201,7 @@ public class DestinationTest
     /**
      * Tests comparing matching destinations.
      */
+    @Test
     public void testEquals()
     {
         Destination same = new Destination("Paris", "Visit the Eiffel Tower");
@@ -203,6 +214,7 @@ public class DestinationTest
     /**
      * Tests comparing destinations that do not match.
      */
+    @Test
     public void testBadEquals()
     {
         Destination different = new Destination("Paris", "Visit the Louvre");
@@ -216,6 +228,7 @@ public class DestinationTest
     /**
      * Tests comparing destinations with null descriptions.
      */
+    @Test
     public void testEqualsNullDescription()
     {
         Destination first = new Destination("Paris", null);
@@ -229,6 +242,7 @@ public class DestinationTest
     /**
      * Tests displaying the destination.
      */
+    @Test
     public void testToString()
     {
         assertEquals("Paris: Visit the Eiffel Tower", destination.toString());
@@ -238,6 +252,7 @@ public class DestinationTest
     /**
      * Tests displaying a destination without a description.
      */
+    @Test
     public void testBlankToString()
     {
         destination.setDescription("");
@@ -248,11 +263,16 @@ public class DestinationTest
 
         assertEquals("Paris", destination.toString());
     }
-    /** Numeric names are rejected at creation and rename without changing state. */
+
+
+    /**
+     * Numeric names are rejected at creation and rename without changing state.
+     */
+    @Test
     public void testNumericNames()
     {
-        String[] names = {"123", " 00123 ", "0", "-12", "+12", "12.5",
-            ".5", "1e3", "１２３", "999999999999999999999999999999"};
+        String[] names = { "123", " 00123 ", "0", "-12", "+12", "12.5", ".5",
+            "1e3", "１２３", "999999999999999999999999999999" };
         Destination item = new Destination("Original", "Details");
         for (String name : names)
         {
@@ -281,15 +301,19 @@ public class DestinationTest
         assertEquals("Route 66", new Destination("Route 66", "").getName());
     }
 
-    /** Zero, decimal and invalid costs, including unchanged state after failure. */
+
+    /**
+     * Zero, decimal and invalid costs, including unchanged state after failure.
+     */
+    @Test
     public void testEstimatedCost()
     {
         Destination item = new Destination("Original", "");
         assertEquals(0.0, item.getEstimatedCost(), 0.0);
         item.setEstimatedCost(12.50);
         assertEquals(12.50, item.getEstimatedCost(), 0.0);
-        double[] invalid = {-1, -0.01, Double.NaN,
-            Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
+        double[] invalid = { -1, -0.01, Double.NaN, Double.POSITIVE_INFINITY,
+            Double.NEGATIVE_INFINITY };
         for (double cost : invalid)
         {
             try
