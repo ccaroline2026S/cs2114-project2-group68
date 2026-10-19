@@ -76,4 +76,115 @@ public class TripManagerTest
         trip.addActivity(new Activity("Hiking", "Trip"));
         trip.displayTrip();
     }
+    
+    @Test
+    public void associatesActivityWithDestination()
+    {
+        TripManager trip = new TripManager();
+
+        Destination paris = new Destination("Paris", "France");
+
+        Activity tour = new Activity("Tour", "Walking Tour");
+
+        trip.addDestination(paris);
+        trip.addActivity(tour);
+
+        assertTrue(
+            trip.associateActivity(tour, paris));
+
+        assertEquals(paris,tour.getDestination());
+    }
+
+
+    @Test
+    public void invalidActivityAssociation()
+    {
+        TripManager trip = new TripManager();
+
+        Destination paris = new Destination("Paris", "France");
+
+        assertFalse(
+            trip.associateActivity(new Activity("Tour", ""), paris));
+    }
+
+
+    @Test
+    public void setDestinationCost()
+    {
+        TripManager trip = new TripManager();
+
+        Destination paris =
+            new Destination("Paris", "France");
+
+        trip.addDestination(paris);
+
+        assertTrue(
+            trip.setDestinationCost(paris, 100.0));
+
+        assertEquals(100.0, paris.getEstimatedCost(), 0.001);
+    }
+
+
+    @Test
+    public void setActivityCost()
+    {
+        TripManager trip = new TripManager();
+
+        Activity tour =
+            new Activity(
+                "Tour",
+                "Walking");
+
+        trip.addActivity(tour);
+
+        assertTrue(
+            trip.setActivityCost(
+                tour,
+                25.0));
+
+        assertEquals(25.0, tour.getEstimatedCost(), 0.001);
+    }
+
+
+    @Test
+    public void estimateTripCost()
+    {
+        TripManager trip = new TripManager();
+
+        Destination paris =
+            new Destination("Paris", "");
+
+        Activity tour =
+            new Activity("Tour", "");
+
+        trip.addDestination(paris);
+        trip.addActivity(tour);
+
+        trip.setDestinationCost(paris, 100);
+        trip.setActivityCost(tour, 50);
+
+        assertEquals(150.0, trip.estimateTripCost(), 0.001);
+    }
+
+
+    @Test
+    public void removeDestinationUnlinksActivities()
+    {
+        TripManager trip = new TripManager();
+
+        Destination paris =
+            new Destination("Paris", "");
+
+        Activity tour =
+            new Activity("Tour", "");
+
+        trip.addDestination(paris);
+        trip.addActivity(tour);
+
+        trip.associateActivity(tour, paris);
+
+        trip.removeDestination(paris);
+
+        assertNull( tour.getDestination());
+    }
 }
