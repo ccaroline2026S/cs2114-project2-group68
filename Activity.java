@@ -7,8 +7,10 @@ package adventurerGo;
 
 public class Activity
 {
+
     private String name;
     private String description;
+    private double estimatedCost;
     private Destination destination;
 
     /**
@@ -30,14 +32,12 @@ public class Activity
      * @param description details about the activity
      * @param destination the destination for this activity
      */
-    public Activity(
-        String name,
-        String description,
-        Destination destination)
+    public Activity(String name, String description, Destination destination)
     {
         this(name, description);
         setDestination(destination);
     }
+
 
 
     /**
@@ -131,9 +131,9 @@ public class Activity
 
 
     /**
-     * Returns the activity information and its linked destination.
+     * Returns the activity information as a String.
      *
-     * @return the formatted activity information
+     * @return the activity name and description
      */
     @Override
     public String toString()
@@ -152,7 +152,8 @@ public class Activity
 
         return result;
     }
-
+    
+    
     
     /**
      * Returns the destination linked to this activity.
@@ -174,4 +175,30 @@ public class Activity
     {
         this.destination = destination;
     }
+
+
+    /**
+     * Returns this item's estimated cost, initially zero. 
+     * @return estimated cost 
+     * */
+    public double getEstimatedCost()
+    {
+        return estimatedCost;
+    }
+
+
+    /** 
+     * Sets a finite, nonnegative cost in the trip's currency. 
+     * @param cost 
+     */
+    public void setEstimatedCost(double cost)
+    {
+        if (!Double.isFinite(cost) || cost < 0)
+        {
+            throw new IllegalArgumentException(
+                "Cost must be a finite, nonnegative number.");
+        }
+        estimatedCost = cost;
+    }
 }
+    
