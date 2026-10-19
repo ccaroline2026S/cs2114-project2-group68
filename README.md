@@ -58,7 +58,7 @@ NodeTest
 TripManagerTest
 
 # Atrribution:
-Main menu - Caroline - Wrote, revised, and tested using GenAI to assist in debugging and making sure all is covered in the testing. 
+Main menu - Caroline, Eyal, Noah- Wrote, revised, and tested using GenAI to assist in debugging and making sure all is covered in the testing. 
 
 Node - Caroline - Wrote, revised, and tested using GenAI to assist in debugging and making sure all is covered in the testing and the notes to get the general format of the class
 
@@ -68,9 +68,10 @@ Trip Manager - Eyal and Jaden - Wrote, revised, and tested using GenAI to review
 
 ReadMe - Caroline - Wrote and revised 
 
-Final Revision - Caroline - Revised additions and ran multiple trials to make sure it all worked
-
 Stretch goals - Cost Estimation - Eyal - Wrote, Association - Noah - Wrote 
+
+Final Revision - Caroline and Eyal- Revised additions and ran multiple trials to make sure it all worked
+
 
 # GenAI Usage
 GenAI was used to:
