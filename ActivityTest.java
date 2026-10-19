@@ -338,4 +338,61 @@ public class ActivityTest
         assertTrue(activity.equals(same));
         assertTrue(same.equals(activity));
     }
+    /** Numeric names are rejected at creation and rename without changing state. */
+    public void testNumericNames()
+    {
+        String[] names = {"123", " 00123 ", "0", "-12", "+12", "12.5",
+            ".5", "1e3", "１２３", "999999999999999999999999999999"};
+        Activity item = new Activity("Original", "Details");
+        for (String name : names)
+        {
+            try
+            {
+                new Activity(name, "Details");
+                fail("Accepted numeric name: " + name);
+            }
+            catch (IllegalArgumentException e)
+            {
+                // Expected
+            }
+            try
+            {
+                item.setName(name);
+                fail("Renamed to numeric name: " + name);
+            }
+            catch (IllegalArgumentException e)
+            {
+                assertEquals("Original", item.getName());
+                assertEquals("Details", item.getDescription());
+            }
+        }
+        item.setName("5K Run");
+        assertEquals("5K Run", item.getName());
+        assertEquals("5K Run", new Activity("5K Run", "").getName());
+    }
+
+    /** Zero, decimal and invalid costs, including unchanged state after failure. */
+    public void testEstimatedCost()
+    {
+        Activity item = new Activity("Original", "");
+        assertEquals(0.0, item.getEstimatedCost(), 0.0);
+        item.setEstimatedCost(12.50);
+        assertEquals(12.50, item.getEstimatedCost(), 0.0);
+        double[] invalid = {-1, -0.01, Double.NaN,
+            Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY};
+        for (double cost : invalid)
+        {
+            try
+            {
+                item.setEstimatedCost(cost);
+                fail("Accepted invalid cost");
+            }
+            catch (IllegalArgumentException e)
+            {
+                assertEquals(12.50, item.getEstimatedCost(), 0.0);
+            }
+        }
+        item.setEstimatedCost(0);
+        assertEquals(0.0, item.getEstimatedCost(), 0.0);
+    }
 }

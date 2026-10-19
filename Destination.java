@@ -9,6 +9,7 @@ public class Destination
 
     private String name;
     private String description;
+    private double estimatedCost;
 
     /**
      * Creates a destination with a name and description.
@@ -58,6 +59,13 @@ public class Destination
                 "Destination name cannot be blank.");
         }
 
+        if (name.trim().matches(
+            "[+-]?(?:\\p{Nd}+(?:\\.\\p{Nd}*)?|\\.\\p{Nd}+)"
+                + "(?:[eE][+-]?\\p{Nd}+)?"))
+        {
+            throw new IllegalArgumentException(
+                "Destination name cannot be only a number.");
+        }
         this.name = name;
     }
 
@@ -127,5 +135,24 @@ public class Destination
         }
 
         return name + ": " + description;
+    }
+
+
+    /** Returns this item's estimated cost, initially zero. */
+    public double getEstimatedCost()
+    {
+        return estimatedCost;
+    }
+
+
+    /** Sets a finite, nonnegative cost in the trip's currency. */
+    public void setEstimatedCost(double cost)
+    {
+        if (!Double.isFinite(cost) || cost < 0)
+        {
+            throw new IllegalArgumentException(
+                "Cost must be a finite, nonnegative number.");
+        }
+        estimatedCost = cost;
     }
 }

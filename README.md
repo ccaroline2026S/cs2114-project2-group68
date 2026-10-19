@@ -44,3 +44,35 @@ Trip Manager - Eyal and Jaden - Wrote, revised, and tested using GenAI to review
 ReadMe - Caroline - Wrote and revised 
 
 Gen AI usage overall was used to debug and brainstorm test cases and make sure there were no large errors that would occur. 
+
+
+# Implemented stretch goals
+
+- Menu 10 links an existing activity to an existing destination. Leave the
+  destination blank to unlink it. Renaming a destination keeps its links;
+  removing it unlinks its activities without deleting them.
+- Menu 11 sets a destination's travel/lodging estimate, excluding activity costs.
+  Menu 12 sets an activity's estimate. Menu 13 displays their combined total.
+  Costs start at zero and use one currency chosen by the user. Each destination
+  and activity is counted once, including unassigned activities. Negative,
+  nonnumeric, NaN and infinite costs are rejected. An overflowing total reports
+  an error. Display rounds the total to two decimal places.
+- Creating or renaming either kind of item rejects numeric-only names, including
+  surrounding spaces, signed numbers, decimals and scientific notation. Names
+  containing words and numbers, such as Route 66 or 5K Run, remain valid.
+  Invalid names are re-prompted in the menu.
+- Manager operations identify items by exact, case-sensitive name. Duplicate
+  names within each type are rejected to avoid ambiguous links and cost updates.
+  Name/description edits preserve existing costs and activity links; the new
+  menu actions change costs and links separately.
+
+Validation: all 61 tests in ActivityTest, DestinationTest, TripManagerTest,
+NodeTest and MainMenuTest pass with Java 17, JUnit 4.13.2 and the course's
+student.jar. Tests cover creation/rename validation, link lifecycle, zero and
+decimal totals, edits/removals, invalid costs, overflow and console re-prompts.
+MainMenuTest was renamed to MainMenuTest.java and its package corrected;
+LinkedChain now declares the same adventurerGo package as the other classes.
+The course test library emits Java SecurityManager deprecation warnings.
+
+These additions used AI assistance for implementation, debugging and test cases.
+Saving/loading and priority tags are not implemented.
