@@ -1,36 +1,50 @@
 # cs2114-project2-group68
-# Reflection 
-What changed from your specification? 
+# AdventurerGo
+By: Caroline Collier, Eyal Shumilov, Noah Bierman, Jaden Moon
 
-In our spec we had not quite figured out how our name and description would work together but once implementing we fully committed to Destination and Activity having two fields. The MainMenu class remained responsible for user interaction but additional validation and re-prompts were added before input data is passed to the TripManager. Validation for empty names is preformed in MainMenu and Destination and Activity is now also preventing invalid objects from being created. We also realized for MainMenu testing it did not need as many tests as they were handled by trip manager.
+# Project Description
+AdventurerGo is a travel planning application that allows users to create and manage destinations and activities for a trip.
 
-What changed in the LinkedChain? 
+Users can:
 
-No changes were made other than making sure it was in the adventurerGo package. We used LinkedChain to be able to store Destination and Activity and reuse the same class for both
+Add destinations
+Remove destinations
+Edit destinations
+Search destinations
+Add activities
+Remove activities
+Edit activities
+Search activities
+Connect activities to destinations (Stretch)
+Assign estimated costs to destinations (Stretch)
+Assign estimated costs to activities (Stretch)
+Estimate the total cost of a trip (Stretch)
 
-What happened to your unknowns?
+The project demonstrates reuse through a generic LinkedChain<T> that stores both Destination and Activity objects.
 
-We now understand exactly how generic work in this project as the T in LinkedChain class and Node class represents the ability for multiple object types to pass through. We also clarified how node fit into the design and how it is the building block for LinkedChain.
+# System Diagram:
+<img width="353" height="242" alt="image" src="https://github.com/user-attachments/assets/987f6d21-dd96-4f52-8ae0-2e4cac0417a4" />
 
-What doesn't work yet? 
+# How to Compile
+1. Clone or Download the repository
+2. Open terminal
+3. Navigate to project directory
+4. Compile all source files:
+javac adventurerGo/*.java
 
-We still need to polish the user-interface and add any stretch goals we can add. There is always more testing that can be added as well. 
+# How to Run
+Run application through:
+java adventurerGo.MainMenu
 
-# Next Steps
-What is left to finish the MVP? 
+# How to Run Tests
+Run the JUnit test classes through your IDE or test runner
+Test Classes:
 
-Continuing to test all user input options to make sure all bad inputs are handled. We would like to add a reprompt for any numbers written for name of destination which was not a goal but something we realized we needed. 
-Which stretch goals we will attempt? We want to make destination and activity related and cost estimation. We are still iffy about saving and loading the data as well as priority tags. These are things we would get to after the first two stretch goals.
-
-What new test will we need?
-
-We will need more test within trip manager if we relate them and any methods created w cost estimation examples would include trying to estimate a string instead of an integer and etc. 
-
-Who does what?
-
-Caroline: Continuing to test MainMenu as well as updating ReadMe. Working on adding cost estimation and code testing.
-Jaden and Noah: work on relating the two Destination and Activity LinkedChains as well as the testing that goes into that. 
-Eyal: Helping add cost estimation and experimenting with data saving. 
+ActivityTest
+DestinationTest
+LinkedChainTest
+NodeTest
+TripManagerTest
 
 # Atrribution:
 Main menu - Caroline - Wrote, revised, and tested using GenAI to assist in debugging and making sure all is covered in the testing. 
@@ -43,4 +57,14 @@ Trip Manager - Eyal and Jaden - Wrote, revised, and tested using GenAI to review
 
 ReadMe - Caroline - Wrote and revised 
 
-Gen AI usage overall was used to debug and brainstorm test cases and make sure there were no large errors that would occur. 
+Final Revision - Caroline - Revised additions and ran multiple trials to make sure it all worked 
+Stretch goals - Cost Estimation - Eyal - Wrote, Association - Noah - Wrote 
+
+# GenAI Usage
+GenAI was used to:
+Debug code and identify error 
+Brainstorm edge cases for testing
+Review implementations for consistency
+Assist with documentation and reflection writing
+
+All generated suggestions were reviewed and tested by team members before being included in the final submission.
