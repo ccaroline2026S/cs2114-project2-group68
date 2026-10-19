@@ -57,7 +57,8 @@ Trip Manager - Eyal and Jaden - Wrote, revised, and tested using GenAI to review
 
 ReadMe - Caroline - Wrote and revised 
 
-Final Revision - Caroline - Revised additions and ran multiple trials to make sure it all worked 
+Final Revision - Caroline - Revised additions and ran multiple trials to make sure it all worked
+
 Stretch goals - Cost Estimation - Eyal - Wrote, Association - Noah - Wrote 
 
 # GenAI Usage
